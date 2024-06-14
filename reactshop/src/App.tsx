@@ -1,8 +1,15 @@
 import React from 'react';
+import styled from "styled-components"
+
+//Componente estilizado
+const Title = styled.h1`
+font-size: 2 rem;
+color: blue;
+`;
 
 function App() {
   return (
-   <h1></h1>
+   <Title>Styled Components</Title>
   );
 }
 
