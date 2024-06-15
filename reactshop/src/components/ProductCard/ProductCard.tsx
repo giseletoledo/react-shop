@@ -6,7 +6,7 @@ import { FiShoppingCart } from "react-icons/fi";
 export const ProductCard: React.FC = () => {
     return(
         <S.Card>
-            <S.ProductImage src="" alt=""/>
+            <S.ProductImage src="https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg" alt=""/>
             <S.ProductTitle>Premium Slim Fit</S.ProductTitle>
             <S.ReviewPriceContainer>
                 <S.Review>4.1</S.Review>
