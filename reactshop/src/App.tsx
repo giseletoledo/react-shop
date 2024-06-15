@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from "styled-components"
-
-//Componente estilizado
-const Title = styled.h1`
-font-size: 2 rem;
-color: blue;
-`;
+import { GlobalStyles } from './styles/GlobalStyles';
+import { Header } from './components/Header/Header';
+import { ProductCard } from './components/ProductCard/ProductCard';
 
 function App() {
   return (
-   <Title>Styled Components</Title>
+    <>
+    <Header/>
+    <ProductCard />
+   <GlobalStyles />
+   </>
   );
 }
 
