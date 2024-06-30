@@ -3,32 +3,59 @@ import { useState } from "react";
 import * as S from "./styles";
 import { FiLogIn, FiLogOut, FiShoppingCart } from "react-icons/fi";
 import { Cart } from "../Cart/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { RootReducer } from "../../redux/root-reducer";
 
 export const Header: React.FC = () => {
+    const { user } = useSelector((rootReducer: RootReducer) => rootReducer.userReducer);
+
+    console.log(user);
+
+    const dispatch = useDispatch();
+
     const [showCart, setShowCart] = useState(false);
-    const isLogged = false;
+    const isLogged = user !== null;
+
+    function handleUserAuth() {
+        //usuário não está logado
+        if (user === null) {
+            //despachar a action de login
+            dispatch({
+                type: "user/login",
+                payload:{
+                    name: "Gisele",
+                    email: "gisele@email.com"
+                }
+            });
+        } else {
+            dispatch({
+                type: "user/logout",
+            })
+        }
+    }
+
+    const toggleCart = () => {
+        setShowCart(!showCart);
+    };
 
     return (
         <S.StyledHeader>
             <S.Wrapper>
                 <S.HeaderTitle>My Shop.</S.HeaderTitle>
+
                 <S.ButtonWrapper>
-                    <S.AuthButton $isLogged={isLogged}>
+                    <S.AuthButton $isLogged={isLogged} onClick={handleUserAuth}>
                         {isLogged ? "Logout" : "Login"}
-                        <S.IconWrapper>
-                            {isLogged ? <FiLogOut /> : <FiLogIn />}
-                        </S.IconWrapper>
+                            {isLogged ? <FiLogOut /> : <FiLogIn />}        
                     </S.AuthButton>
+
                     <S.CartButton onClick={() => setShowCart(!showCart)}>
                         Carrinho
-                        <S.IconWrapper>
                             <FiShoppingCart />
-                        </S.IconWrapper>
                     </S.CartButton>
-
                 </S.ButtonWrapper>
             </S.Wrapper>
-            <Cart $showCart={showCart} />
+            <Cart showCart={showCart} toggleCart={toggleCart}/>
         </S.StyledHeader>
     );
 };

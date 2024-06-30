@@ -7,7 +7,7 @@ interface ContainerProps {
 export const Container = styled.aside<ContainerProps>`
     position: fixed;
     top: 0;
-    right: ${(props)=> (props.$showCart ? "0" : "-350px")};
+    right: ${(props)=> (props.$showCart ? "0px" : "-350px")};
 
     width: 350px;
     height: 100vh;
@@ -15,8 +15,16 @@ export const Container = styled.aside<ContainerProps>`
 
     padding: 2rem;
     box-shadow: -5 0 15px rgba(0,0,0, 0.25);
+`;
 
-  
+export const CloseButton = styled.button`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    cursor: pointer;
 `;
 
 export const Title = styled.h1``;
