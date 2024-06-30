@@ -9,15 +9,30 @@ interface UserState{
 
 const initialState: UserState = {
     user: null,
+    /* user: {
+        name: "Gisele",
+        email: "gisele@email.com",
+    } */
 }
 
 //Reducer - guarda o estado, manipula e altera
-
 interface UserAction {
     type: string;
-    payload: User
+    payload?: User;
 }
 
-export function userReducer(state = initialState, action: UserAction) {
-    
+//Todo reducer precisa retornar o nosso estado atualizado
+export function userReducer(state = initialState, action: UserAction): UserState {
+    if(action.type === 'user/login'){
+        return {
+            ...state,
+            user: action.payload as User,//sem o as dá erro
+        }
+     } else if (action.type === 'user/logout') {
+            return{
+                ...state,
+                user: null
+            }
+        } 
+    return state;
 }
