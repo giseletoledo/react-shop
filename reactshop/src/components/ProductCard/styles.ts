@@ -48,7 +48,7 @@ export const Review = styled.span`
 
 export const Price = styled.strong``;
 
-export const AddToCartButtonWrapper = styled.button`
+export const AddToCartButtonWrapper = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
