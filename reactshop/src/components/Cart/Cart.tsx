@@ -17,6 +17,8 @@ export const Cart: React.FC<CartProps> = ({ showCart, toggleCart }) => {
         return totalCart + product.price;
     },0)
 
+    const totalFormatted = total.toFixed(2);
+
     return (
         <S.Container $showCart={showCart} >
             <S.Title>Carrinho</S.Title>
@@ -28,7 +30,7 @@ export const Cart: React.FC<CartProps> = ({ showCart, toggleCart }) => {
                     </S.CartProductItem>
                 )) }
             </S.CartProductList>
-            <S.CartTotal>Total: ${total} </S.CartTotal>
+            <S.CartTotal>Total: ${totalFormatted} </S.CartTotal>
         </S.Container>
     );
 };
