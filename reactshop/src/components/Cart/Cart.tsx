@@ -1,16 +1,20 @@
 import React from 'react'
 import * as S from './styles'// usa o S para identicar styled components
-import { useSelector } from 'react-redux';
-import { RootReducer, rootReducer } from '../../redux/root-reducer';
+//import { useSelector } from 'react-redux';
+//import { RootReducer, rootReducer } from '../../redux/root-reducer';
+import { Product } from '../../data/products';
+import { useDispatch } from 'react-redux';
+import { removeProduct } from './cart-slice';
 
 interface CartProps {
     showCart: boolean;
+    cart: Product[];
     toggleCart: () => void;
 }
 
-export const Cart: React.FC<CartProps> = ({ showCart, toggleCart }) => {
+export const Cart: React.FC<CartProps> = ({ showCart, cart, toggleCart }) => {
 
-    const { cart } = useSelector((rootReducer: RootReducer) => rootReducer.cartReducer);
+    const dispatch = useDispatch();
 
     //totalCart - acumulador começa em 0 e vai somando para cada product o valor - inicia 0 + product(valor)
     const total = cart.reduce((totalCart, product) => {
@@ -27,10 +31,13 @@ export const Cart: React.FC<CartProps> = ({ showCart, toggleCart }) => {
                 { cart.map(product => (
                     <S.CartProductItem key={product.id}>
                        <span className='bold-text'>{product.title}</span> - ${product.price}
+                       <button onClick={() => dispatch(removeProduct(product))}>
+                        Remover
+                       </button>
                     </S.CartProductItem>
                 )) }
             </S.CartProductList>
-            <S.CartTotal>Total: ${totalFormatted} </S.CartTotal>
+            <S.CartTotal data-testid="total">Total: ${totalFormatted} </S.CartTotal>
         </S.Container>
     );
 };
